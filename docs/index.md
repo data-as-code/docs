@@ -4,32 +4,33 @@
   <img src="img/motto.png" alt="drawing" width="450"/>
 </div>
 
-Data as Code (DaC) is a paradigm of distributing versioned data as versioned code.
+Data as Code (DaC) is a paradigm of distributing versioned data as code. Think of it as treating your data with the same
+care and precision as your software.
 
 !!! warning "Disclaimer"
 
-    Currently the focus is on tabular and batch data, and Python code only.
+    At the moment, we're focusing on tabular and batch data, with Python as the primary language.
 
-    Future extensions may be possible, depending on the community interest.
+    But who knows? With enough community interest, we might expand to other areas in the future!
 
 ## Consumer - Data Scientist
 
 ??? info "Follow along"
 
-    The code snippets below can be executed on your machine too! You just need to configure `pip` to point to the pypi
-    registry where we stored the example DaC package. You can do this by running
+    Want to try the examples below on your own machine? It's easy! Just configure `pip` to point to the PyPI registry where
+    the example DaC package is stored. Run this command:
 
     ```shell
     ❯ export PIP_EXTRA_INDEX_URL=https://gitlab.com/api/v4/projects/43746775/packages/pypi/simple
     ```
 
-    Of course don't forget to create an isolated environment before using `pip` to install the package:
+    And don't forget to create an isolated environment before installing the package:
 
     ```shell
     ❯ python -m venv venv && . venv/bin/activate
     ```
 
-Say that the Data Engineers prepared the DaC `dac-example-energy` for you. Install it with
+Imagine the Data Engineers have prepared a DaC package called `dac-example-energy` just for you. Install it like this:
 
 ```shell
 ❯ python -m pip install dac-example-energy
@@ -37,10 +38,12 @@ Say that the Data Engineers prepared the DaC `dac-example-energy` for you. Insta
 Successfully installed ... dac-example-energy-2.0.2 ...
 ```
 
-Have you noticed the version `2.0.2`? That is the version of your data. This is very important, you can read
-[here](#make-releases) why.
+Notice the version `2.0.2`? That’s the version of your data! Curious to know more about the importance of the version?
+Check out [this section](#make-releases).
 
-Now, how do you grab the data?
+### Grab the data with the snap of a finger: `load`
+
+Now, let’s grab the data:
 
 ```python
 >>> from dac_example_energy import load
@@ -62,12 +65,13 @@ Now, how do you grab the data?
 [71160 rows x 5 columns]
 ```
 
-One more very valuable tool is the `Schema` class. `Schema` is the implementation of a Data Contract, which is a
-contract between the data producer and the data consumer. It describes the data, its structure, and the constraints that
-the data must fulfill. At the very least it will have a `validate` method that verifies if a given data set fulfills the
-data contract. Loaded data is guaranteed to pass the validation.
+### Meet the `Schema` Class: Your Data’s Best Friend
 
-Let us see what we can do with the `Schema` in the `dac-example-energy` package.
+The `Schema` class is the backbone of the Data Contract. It’s a promise between the data producer and the data consumer.
+It defines the structure, constraints, and expectations for the data. And here’s the best part: any data you load is
+guaranteed to pass validation.
+
+Let’s explore what the `Schema` in the `dac-example-energy` package can do:
 
 ```python
 >>> from dac_example_energy import Schema
@@ -119,9 +123,9 @@ class Schema(pa.SchemaModel):
     )
 ```
 
-In this case [`pandera`](https://pandera.readthedocs.io/en/stable/index.html) has been used to define the Schema. We can
+This `Schema` is built using [`pandera`](https://pandera.readthedocs.io/en/stable/index.html). Here’s why it’s awesome:
 
-- see which columns are available and even reference their names in our code without cumbersome hardcoded strings:
+- **Column names are accessible**: No more hardcoding strings! Reference column names directly in your code:
     ```python
     >>> df[Schema.value_in_gwh]
     0        6644.088
@@ -137,62 +141,55 @@ In this case [`pandera`](https://pandera.readthedocs.io/en/stable/index.html) ha
     71159       0.000
     Name: OBS_VALUE, Length: 71160, dtype: float64
     ```
-- for each column, we exactly know what to expect. For example, what is the column type, are `None` values allowed, are
-    there specific admitted categorical values, etc.;
-- we can read a useful description of the column;
-- if we install `pandera[strategies]` with `pip`, we can even generate synthetic data that is guaranteed to pass the
-    schema validation. This is very useful for testing our code:
+- **Clear expectations**: Know exactly what each column should contain—types, constraints, and more.
+- **Self-documenting**: Each column comes with a description.
+- **Synthetic data generation**: Install `pandera[strategies]` and generate test data that passes validation:
+    ```python
+    >>> Schema.example(size=5)
+                siec_name            nrg_bal_name geo  TIME_PERIOD  OBS_VALUE
+    0         Natural gas  Gross available energy  AL         1990        0.0
+    1  Solid fossil fuels  Gross available energy  AL         1990        0.0
+    2  Solid fossil fuels  Gross available energy  AL         1990        0.0
+    3  Solid fossil fuels  Gross available energy  AL         1990        0.0
+    4  Solid fossil fuels  Gross available energy  AL         1990        0.0
+    ```
 
-```python
->>> Schema.example(size=5)
-            siec_name            nrg_bal_name geo  TIME_PERIOD  OBS_VALUE
-0         Natural gas  Gross available energy  AL         1990        0.0
-1  Solid fossil fuels  Gross available energy  AL         1990        0.0
-2  Solid fossil fuels  Gross available energy  AL         1990        0.0
-3  Solid fossil fuels  Gross available energy  AL         1990        0.0
-4  Solid fossil fuels  Gross available energy  AL         1990        0.0
-```
+!!! hint "Example data looks odd?"
 
-!!! hint "Example data does not look right"
-
-    The example data above does not look right. Does this mean that there is something wrong in the implementation of the
-    `example` method? Not really! Read [here](#nice-to-have-schemaexample-method).
+    The synthetic data above might not look realistic. Does this mean the `example` method is broken? Not at all! Check out
+    [this section](#nice-to-have-schemaexample-method) to learn more.
 
 ## Producer - Data Engineer
 
-Data as Code is a paradigm, it does not require any special tool or library. Anyone is free to implement it in his own
-way and, by the way, may do so in programming languages other than Python. The tools that we built and describe below
-(template and CLI tool `dac`) are just **convenience** tools, meaning that they may accelerate your development process,
-but are not strictly necessary.
+Data as Code is a paradigm, not a tool. You can implement it however you like, in any language. That said, we’ve built
+some handy tools to make your life easier.
 
-!!! hint "Use [`pandera`](https://pandera.readthedocs.io/en/stable/index.html) to define the Schema"
+!!! hint "Pro Tip: Use [`pandera`](https://pandera.readthedocs.io/en/stable/index.html) for defining schemas"
 
-    If the dataframe engine (pandas/polars/dask/spark...) you are using is supported by
-    [`pandera`](https://pandera.readthedocs.io/en/stable/index.html), consider using a
-    [`DataFrameModel`](https://pandera.readthedocs.io/en/stable/dataframe_models.html) to define the Schema.
+    If your dataframe engine (pandas, polars, dask, spark, etc.) is supported by `pandera`, consider using a
+    [`DataFrameModel`](https://pandera.readthedocs.io/en/stable/dataframe_models.html) to define your schema.
 
 ### Write the library
 
 #### 1. Start from scratch
 
-!!! warning "This approach expects you to be familiar with python packaging"
+!!! warning "This approach requires Python packaging knowledge"
 
-Build you own library, respecting the following constraints:
+Build your own library while following these guidelines:
 
 ##### Public function `load`
 
-A public function named `load` is available at the root of package. For example, if you build the package
-`dac-my-awesome-data`, it should be possible to do the following:
+Your package must have a public function named `load` at its root. For example, if your package is
+`dac-my-awesome-data`, users should be able to do this:
 
 ```python
 >>> from dac_my_awesome_data import load
 >>> df = load()
 ```
 
-Notice that it must be possible to call `load()` without any argument, and the version of the returned data must
-correspond to the version of the package. This means that data will be different at every build.
+The `load()` function should return data corresponding to the package version. Each build should produce different data.
 
-##### Data fulfill the `Schema.validate()` method
+##### Data must pass `Schema.validate()`
 
 A public class named `Schema` is available at the root of package and implements the Data Contract. `Schema` has a
 `validate` method which takes data as input and raises an error if the Contract is not fulfilled, and returns the data
@@ -222,7 +219,7 @@ It is possible to reference the column names from the `Schema` class. For exampl
 
 ##### [Nice to have] `Schema.example` method
 
-It is possible to generate synthetic data that fulfill the Data Contract. For example:
+Provide a method to generate synthetic data that fulfills the Data Contract:
 
 ```python
 >>> from dac_my_awesome_data import Schema
@@ -245,19 +242,19 @@ be probably a good idea to add meaningful constraint checks to the `Schema` clas
 
 #### 2. Use the template
 
-We provide a [Copier](https://copier.readthedocs.io/en/stable/) template to get started quickly.
+We’ve created a [Copier](https://copier.readthedocs.io/en/stable/) template to help you get started quickly.
 
-[Take me to the template :material-cursor-default-click:](https://gitlab.com/data-as-code/template/src){ .md-button }
+[Check out the template :material-cursor-default-click:](https://gitlab.com/data-as-code/template/src){ .md-button }
 
 #### 3. Use the [`dac`](https://github.com/data-as-code/dac) CLI tool
 
-Out CLI `dac` tool is a convenience tool capable of building a python package that respects the Data as Code paradigm.
+Our `dac` CLI tool simplifies building Python packages that follow the Data as Code paradigm.
 
-[Take me to the `dac` CLI tool :material-cursor-default-click:](https://github.com/data-as-code/dac){ .md-button }
+[Explore the `dac` CLI tool :material-cursor-default-click:](https://github.com/data-as-code/dac){ .md-button }
 
-#### Compare template and `dac pack`
+#### Template vs. `dac pack`
 
-Which one should you use?
+Which one should you choose?
 
 |                              |         Template          |      `dac pack`       |
 | :--------------------------: | :-----------------------: | :-------------------: |
@@ -268,34 +265,28 @@ Which one should you use?
 
 Choosing the right release version plays a crucial role in the Data as Code paradigm.
 
-Semantic versioning is used to communicate significant changes:
+|           | When to Use                                                  |
+| :-------: | :----------------------------------------------------------- |
+| __Patch__ | Fixes in the data without changing its intended content      |
+| __Minor__ | Non-breaking changes, like a fresh version of the batch data |
+| __Major__ | Breaking changes, such as changes to the Data Contract       |
 
-|           | Reason                                                                               |
-| :-------: | :----------------------------------------------------------------------------------- |
-| __Patch__ | Fix in the data. Intended content unchanged                                          |
-| __Minor__ | Change in the data that does not break the Data Contract - typically, new batch data |
-| __Major__ | Change in the Data Contract, or any other breaking change                            |
-
-__Typically Patch and Major releases involve a manual process, while Minor releases can be automated.__ Our
-[`dac` CLI tool](https://github.com/data-as-code/dac) can help you with the automated releases. Explore the command
-`dac next-version`.
+__Patch and Major releases are usually manual, while Minor releases can be automated.__ Use the `dac` CLI tool to
+automate Minor releases with the `dac next-version` command.
 
 ## Why distributing Data as Code?
 
-- __Data Scientists have a very convenient way to ensure that their code is not run on incompatible data.__ They can
-    simply include the Data as Code into their dependencies (e.g. `dac-example-energy~=1.0`), and then installation of
-    their code with incompatible data will fail (e.g. `dac-example-energy` version `2.0.0`).
-- __Data pipelines can receive data updates without breaking.__ Data can subscribe to a major version of the data, and
-    can receive updates without breaking changes.
-- __It provides a way to maintain multiple release streams__ (e.g. `1.X.Y` and `2.X.Y`). This is useful when a new
-    version of the data is released, but some users are still using the old version. In this case, the data engineer can
-    keep releasing updates for both versions, until all users have migrated to the new version.
-- __The code needed to load the data, the data source, and locations are abstracted away from the consumer.__ This mean
-    that the Data Producer can start from local files, transition to SQL database, cloud file storage, or kafka topic,
-    without having the consumer to notice it or need to adapt its code.
-- _If you provide column names in `Schema`_ (e.g. `Schema.column_1`), __the consumer's code will not contain hard-coded
-    column names__, and changes in data source field names won't impact the user.
-- _If you provide the `Schema.example` method_, __the consumer will be able to build robust code by writing unit testing
-    for their functions__. This will result in a more robust data pipeline.
-- _If the description of the data and columns is included in the `Schema`_, __data will be self-documented, from a
-    consumer perspective__.
+- **Seamless compatibility**: Data Scientists can ensure their code runs on compatible data by including the Data as
+    Code package as a dependency to their code. For example, if they add `dac-example-energy~=1.0` to the dependencies,
+    it will not be possible to use it together with `dac-example-energy==2.0.0`.
+- **Smooth updates**: Data pipelines can receive updates without breaking, as long as they subscribe to a major version.
+- **Multiple release streams**: Maintain different versions (e.g., `1.X.Y` and `2.X.Y`) to support users on older
+    versions.
+- **Abstracted complexity**: Data loading, sources, and locations are hidden from consumers, allowing producers to
+    change implementations without impacting users.
+- **No hardcoded column names**: *If column names are included in the `Schema`*, consumers can avoid hardcoding field
+    names.
+- **Robust testing**: *If the `Schema.example` method is provided*, it enables consumers to write strong unit tests for
+    their code.
+- **Self-documenting data**: *If data and column descriptions are included in the `Schema`*, data will be easier to
+    understand for consumers.
