@@ -1,0 +1,962 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>Data as Code</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.4af4bdda.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-as-code" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Data as Code" class="md-header__button md-logo" aria-label="Data as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Data as Code
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/data-as-code/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Data as Code" class="md-nav__button md-logo" aria-label="Data as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Data as Code
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/data-as-code/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#consumer-data-scientist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consumer - Data Scientist
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Consumer - Data Scientist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grab-the-data-with-the-snap-of-a-finger-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grab the data with the snap of a finger: load
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meet-the-schema-class-your-datas-best-friend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meet the Schema Class: Your Data’s Best Friend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#producer-data-engineer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Producer - Data Engineer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Producer - Data Engineer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-the-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write the library
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Write the library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-from-scratch" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Start from scratch
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Start from scratch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-function-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      Public function load
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-must-pass-schemavalidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data must pass Schema.validate()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nice-to-have-schema-contains-column-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      [Nice to have] Schema contains column names
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nice-to-have-schemaexample-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      [Nice to have] Schema.example method
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Use the template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-use-the-dac-cli-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Use the dac CLI tool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-vs-dac-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template vs. dac pack
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Make Releases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-distributing-data-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why distributing Data as Code?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#consumer-data-scientist" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consumer - Data Scientist
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Consumer - Data Scientist">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grab-the-data-with-the-snap-of-a-finger-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grab the data with the snap of a finger: load
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meet-the-schema-class-your-datas-best-friend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Meet the Schema Class: Your Data’s Best Friend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#producer-data-engineer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Producer - Data Engineer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Producer - Data Engineer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-the-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write the library
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Write the library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-from-scratch" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Start from scratch
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Start from scratch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-function-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      Public function load
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-must-pass-schemavalidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data must pass Schema.validate()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nice-to-have-schema-contains-column-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      [Nice to have] Schema contains column names
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nice-to-have-schemaexample-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      [Nice to have] Schema.example method
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-the-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Use the template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-use-the-dac-cli-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Use the dac CLI tool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-vs-dac-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template vs. dac pack
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Make Releases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-distributing-data-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why distributing Data as Code?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/data-as-code/docs/edit/main/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="data-as-code">Data as Code<a class="headerlink" href="#data-as-code" title="Permanent link">&para;</a></h1>
+<div align="center">
+  <img src="img/motto.png" alt="drawing" width="450"/>
+</div>
+
+<p>Data as Code (DaC) is a paradigm of distributing versioned data as code. Think of it as treating your data with the same
+care and precision as your software.</p>
+<div class="admonition warning">
+<p class="admonition-title">Disclaimer</p>
+<p>At the moment, we're focusing on tabular and batch data, with Python as the primary language.</p>
+<p>But who knows? With enough community interest, we might expand to other areas in the future!</p>
+</div>
+<h2 id="consumer-data-scientist">Consumer - Data Scientist<a class="headerlink" href="#consumer-data-scientist" title="Permanent link">&para;</a></h2>
+<details class="info">
+<summary>Follow along</summary>
+<p>Want to try the examples below on your own machine? It's easy! Just configure <code>pip</code> to point to the PyPI registry where
+the example DaC package is stored. Run this command:</p>
+<div class="highlight"><pre><span></span><code>❯<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">PIP_EXTRA_INDEX_URL</span><span class="o">=</span>https://gitlab.com/api/v4/projects/43746775/packages/pypi/simple
+</code></pre></div>
+<p>And don't forget to create an isolated environment before installing the package:</p>
+<div class="highlight"><pre><span></span><code>❯<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>.<span class="w"> </span>venv/bin/activate
+</code></pre></div>
+</details>
+<p>Imagine the Data Engineers have prepared a DaC package called <code>dac-example-energy</code> just for you. Install it like this:</p>
+<div class="highlight"><pre><span></span><code>❯<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>dac-example-energy
+...
+Successfully<span class="w"> </span>installed<span class="w"> </span>...<span class="w"> </span>dac-example-energy-2.0.2<span class="w"> </span>...
+</code></pre></div>
+<p>Notice the version <code>2.0.2</code>? That’s the version of your data! Curious to know more about the importance of the version?
+Check out <a href="#make-releases">this section</a>.</p>
+<h3 id="grab-the-data-with-the-snap-of-a-finger-load">Grab the data with the snap of a finger: <code>load</code><a class="headerlink" href="#grab-the-data-with-the-snap-of-a-finger-load" title="Permanent link">&para;</a></h3>
+<p>Now, let’s grab the data:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dac_example_energy</span> <span class="kn">import</span> <span class="n">load</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span>
+                         <span class="n">nrg_bal_name</span>            <span class="n">siec_name</span> <span class="n">geo</span>  <span class="n">TIME_PERIOD</span>  <span class="n">OBS_VALUE</span>
+<span class="mi">0</span>      <span class="n">Final</span> <span class="n">consumption</span> <span class="o">-</span> <span class="n">energy</span> <span class="n">use</span>   <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">AL</span>         <span class="mi">1990</span>   <span class="mf">6644.088</span>
+<span class="mi">1</span>      <span class="n">Final</span> <span class="n">consumption</span> <span class="o">-</span> <span class="n">energy</span> <span class="n">use</span>   <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">AL</span>         <span class="mi">1991</span>   <span class="mf">3816.945</span>
+<span class="mi">2</span>      <span class="n">Final</span> <span class="n">consumption</span> <span class="o">-</span> <span class="n">energy</span> <span class="n">use</span>   <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">AL</span>         <span class="mi">1992</span>   <span class="mf">1067.475</span>
+<span class="mi">3</span>      <span class="n">Final</span> <span class="n">consumption</span> <span class="o">-</span> <span class="n">energy</span> <span class="n">use</span>   <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">AL</span>         <span class="mi">1993</span>    <span class="mf">525.540</span>
+<span class="mi">4</span>      <span class="n">Final</span> <span class="n">consumption</span> <span class="o">-</span> <span class="n">energy</span> <span class="n">use</span>   <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">AL</span>         <span class="mi">1994</span>    <span class="mf">459.514</span>
+<span class="o">...</span>                               <span class="o">...</span>                  <span class="o">...</span>  <span class="o">..</span>          <span class="o">...</span>        <span class="o">...</span>
+<span class="mi">71155</span>          <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">Non</span><span class="o">-</span><span class="n">renewable</span> <span class="n">waste</span>  <span class="n">XK</span>         <span class="mi">2015</span>      <span class="mf">0.000</span>
+<span class="mi">71156</span>          <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">Non</span><span class="o">-</span><span class="n">renewable</span> <span class="n">waste</span>  <span class="n">XK</span>         <span class="mi">2016</span>      <span class="mf">0.000</span>
+<span class="mi">71157</span>          <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">Non</span><span class="o">-</span><span class="n">renewable</span> <span class="n">waste</span>  <span class="n">XK</span>         <span class="mi">2017</span>      <span class="mf">0.000</span>
+<span class="mi">71158</span>          <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">Non</span><span class="o">-</span><span class="n">renewable</span> <span class="n">waste</span>  <span class="n">XK</span>         <span class="mi">2018</span>      <span class="mf">0.000</span>
+<span class="mi">71159</span>          <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">Non</span><span class="o">-</span><span class="n">renewable</span> <span class="n">waste</span>  <span class="n">XK</span>         <span class="mi">2019</span>      <span class="mf">0.000</span>
+
+<span class="p">[</span><span class="mi">71160</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">5</span> <span class="n">columns</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="meet-the-schema-class-your-datas-best-friend">Meet the <code>Schema</code> Class: Your Data’s Best Friend<a class="headerlink" href="#meet-the-schema-class-your-datas-best-friend" title="Permanent link">&para;</a></h3>
+<p>The <code>Schema</code> class is the backbone of the Data Contract. It’s a promise between the data producer and the data consumer.
+It defines the structure, constraints, and expectations for the data. And here’s the best part: any data you load is
+guaranteed to pass validation.</p>
+<p>Let’s explore what the <code>Schema</code> in the <code>dac-example-energy</code> package can do:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dac_example_energy</span> <span class="kn">import</span> <span class="n">Schema</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">inspect</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">Schema</span><span class="p">))</span>
+<span class="k">class</span> <span class="nc">Schema</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">SchemaModel</span><span class="p">):</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">isin</span><span class="o">=</span><span class="p">[</span>
+            <span class="s2">&quot;Solid fossil fuels&quot;</span><span class="p">,</span>
+            <span class="o">...</span>
+            <span class="s2">&quot;Non-renewable waste&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;siec_name&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Source of energy&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">value_meaning</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">isin</span><span class="o">=</span><span class="p">[</span>
+            <span class="s2">&quot;Gross available energy&quot;</span><span class="p">,</span>
+            <span class="o">...</span>
+            <span class="s2">&quot;Final consumption - transport sector - energy use&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;nrg_bal_name&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Meaning of the value&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">location</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">isin</span><span class="o">=</span><span class="p">[</span>
+            <span class="s2">&quot;AL&quot;</span><span class="p">,</span>
+            <span class="o">...</span>
+            <span class="s2">&quot;XK&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;geo&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Location code, either two-digit ISO 3166-1 alpha-2 code or &quot;</span>
+        <span class="s2">&quot;&#39;EA19&#39;, &#39;EU27_2020&#39;, &#39;EU28&#39; for the European Union&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">year</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">ge</span><span class="o">=</span><span class="mi">1990</span><span class="p">,</span>
+        <span class="n">le</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;TIME_PERIOD&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Year of observation&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">value_in_gwh</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;OBS_VALUE&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Value in GWh&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+<p>This <code>Schema</code> is built using <a href="https://pandera.readthedocs.io/en/stable/index.html"><code>pandera</code></a>. Here’s why it’s awesome:</p>
+<ul>
+<li><strong>Column names are accessible</strong>: No more hardcoding strings! Reference column names directly in your code:
+    <div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">df</span><span class="p">[</span><span class="n">Schema</span><span class="o">.</span><span class="n">value_in_gwh</span><span class="p">]</span>
+<span class="mi">0</span>        <span class="mf">6644.088</span>
+<span class="mi">1</span>        <span class="mf">3816.945</span>
+<span class="mi">2</span>        <span class="mf">1067.475</span>
+<span class="mi">3</span>         <span class="mf">525.540</span>
+<span class="mi">4</span>         <span class="mf">459.514</span>
+           <span class="o">...</span>
+<span class="mi">71155</span>       <span class="mf">0.000</span>
+<span class="mi">71156</span>       <span class="mf">0.000</span>
+<span class="mi">71157</span>       <span class="mf">0.000</span>
+<span class="mi">71158</span>       <span class="mf">0.000</span>
+<span class="mi">71159</span>       <span class="mf">0.000</span>
+<span class="n">Name</span><span class="p">:</span> <span class="n">OBS_VALUE</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">71160</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></li>
+<li><strong>Clear expectations</strong>: Know exactly what each column should contain—types, constraints, and more.</li>
+<li><strong>Self-documenting</strong>: Each column comes with a description.</li>
+<li><strong>Synthetic data generation</strong>: Install <code>pandera[strategies]</code> and generate test data that passes validation:
+    <div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">Schema</span><span class="o">.</span><span class="n">example</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+            <span class="n">siec_name</span>            <span class="n">nrg_bal_name</span> <span class="n">geo</span>  <span class="n">TIME_PERIOD</span>  <span class="n">OBS_VALUE</span>
+<span class="mi">0</span>         <span class="n">Natural</span> <span class="n">gas</span>  <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">AL</span>         <span class="mi">1990</span>        <span class="mf">0.0</span>
+<span class="mi">1</span>  <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">AL</span>         <span class="mi">1990</span>        <span class="mf">0.0</span>
+<span class="mi">2</span>  <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">AL</span>         <span class="mi">1990</span>        <span class="mf">0.0</span>
+<span class="mi">3</span>  <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">AL</span>         <span class="mi">1990</span>        <span class="mf">0.0</span>
+<span class="mi">4</span>  <span class="n">Solid</span> <span class="n">fossil</span> <span class="n">fuels</span>  <span class="n">Gross</span> <span class="n">available</span> <span class="n">energy</span>  <span class="n">AL</span>         <span class="mi">1990</span>        <span class="mf">0.0</span>
+</code></pre></div></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Example data looks odd?</p>
+<p>The synthetic data above might not look realistic. Does this mean the <code>example</code> method is broken? Not at all! Check out
+<a href="#nice-to-have-schemaexample-method">this section</a> to learn more.</p>
+</div>
+<h2 id="producer-data-engineer">Producer - Data Engineer<a class="headerlink" href="#producer-data-engineer" title="Permanent link">&para;</a></h2>
+<p>Data as Code is a paradigm, not a tool. You can implement it however you like, in any language. That said, we’ve built
+some handy tools to make your life easier.</p>
+<div class="admonition hint">
+<p class="admonition-title">Pro Tip: Use <a href="https://pandera.readthedocs.io/en/stable/index.html"><code>pandera</code></a> for defining schemas</p>
+<p>If your dataframe engine (pandas, polars, dask, spark, etc.) is supported by <code>pandera</code>, consider using a
+<a href="https://pandera.readthedocs.io/en/stable/dataframe_models.html"><code>DataFrameModel</code></a> to define your schema.</p>
+</div>
+<h3 id="write-the-library">Write the library<a class="headerlink" href="#write-the-library" title="Permanent link">&para;</a></h3>
+<h4 id="1-start-from-scratch">1. Start from scratch<a class="headerlink" href="#1-start-from-scratch" title="Permanent link">&para;</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">This approach requires Python packaging knowledge</p>
+</div>
+<p>Build your own library while following these guidelines:</p>
+<h5 id="public-function-load">Public function <code>load</code><a class="headerlink" href="#public-function-load" title="Permanent link">&para;</a></h5>
+<p>Your package must have a public function named <code>load</code> at its root. For example, if your package is
+<code>dac-my-awesome-data</code>, users should be able to do this:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dac_my_awesome_data</span> <span class="kn">import</span> <span class="n">load</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
+</code></pre></div>
+<p>The <code>load()</code> function should return data corresponding to the package version. Each build should produce different data.</p>
+<h5 id="data-must-pass-schemavalidate">Data must pass <code>Schema.validate()</code><a class="headerlink" href="#data-must-pass-schemavalidate" title="Permanent link">&para;</a></h5>
+<p>A public class named <code>Schema</code> is available at the root of package and implements the Data Contract. <code>Schema</code> has a
+<code>validate</code> method which takes data as input and raises an error if the Contract is not fulfilled, and returns the data
+otherwise.</p>
+<p>Notice that the Data Contract should be verified at building time, therefore ensuring that given a Data as Code package,
+the data coming from <code>load()</code> will always fulfill the Data Contract.</p>
+<p>This means that, for example, it must be possible to do the following:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dac_my_awesome_data</span> <span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">Schema</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Schema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">load</span><span class="p">())</span>
+</code></pre></div>
+<p>and will never raise an error.</p>
+<h5 id="nice-to-have-schema-contains-column-names">[Nice to have] <code>Schema</code> contains column names<a class="headerlink" href="#nice-to-have-schema-contains-column-names" title="Permanent link">&para;</a></h5>
+<p>It is possible to reference the column names from the <code>Schema</code> class. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dac_my_awesome_data</span> <span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">Schema</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span><span class="p">[</span><span class="n">Schema</span><span class="o">.</span><span class="n">column_1</span><span class="p">]</span>
+</code></pre></div>
+<h5 id="nice-to-have-schemaexample-method">[Nice to have] <code>Schema.example</code> method<a class="headerlink" href="#nice-to-have-schemaexample-method" title="Permanent link">&para;</a></h5>
+<p>Provide a method to generate synthetic data that fulfills the Data Contract:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dac_my_awesome_data</span> <span class="kn">import</span> <span class="n">Schema</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Schema</span><span class="o">.</span><span class="n">example</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+   <span class="n">column_1</span>  <span class="n">column_2</span>
+<span class="mi">0</span>         <span class="mi">1</span>         <span class="mi">2</span>
+<span class="mi">1</span>         <span class="mi">3</span>         <span class="mi">4</span>
+<span class="mi">2</span>         <span class="mi">5</span>         <span class="mi">6</span>
+<span class="mi">3</span>         <span class="mi">7</span>         <span class="mi">8</span>
+<span class="mi">4</span>         <span class="mi">9</span>        <span class="mi">10</span>
+</code></pre></div>
+<p>Ideally synthetic data should be such to really stretch the limits of the Data Contract. By this we mean that the
+generated data should be as far aways as possible to the real data, but still fulfill the Data Contract. This is useful
+to make the tests built using this feature as robust as possible. Also, this will push the developers to improve the
+Data Contract, and therefore will make it as reliable as possible. For example, in the
+<a href="#consumer-data-scientist">Consumer</a> section, you may have noticed that the rows have nearly alwyas the same values.
+This is unlikely to be the case in the real data, but as it is not envoded in the Schema it may still happen! It would
+be probably a good idea to add meaningful constraint checks to the <code>Schema</code> class.</p>
+<h4 id="2-use-the-template">2. Use the template<a class="headerlink" href="#2-use-the-template" title="Permanent link">&para;</a></h4>
+<p>We’ve created a <a href="https://copier.readthedocs.io/en/stable/">Copier</a> template to help you get started quickly.</p>
+<p><a class="md-button" href="https://gitlab.com/data-as-code/template/src">Check out the template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.76 8.69a.76.76 0 0 0-.76.76V20.9c0 .42.34.76.76.76.19 0 .35-.06.48-.16l1.91-1.55 1.66 3.62c.13.27.4.43.69.43.11 0 .22 0 .33-.08l2.76-1.28c.38-.18.56-.64.36-1.01L17.28 18l2.41-.45a.9.9 0 0 0 .43-.26c.27-.32.23-.79-.12-1.08l-8.74-7.35-.01.01a.76.76 0 0 0-.49-.18M15 10V8h5v2zm-1.17-5.24 2.83-2.83 1.41 1.41-2.83 2.83zM10 0h2v5h-2zM3.93 14.66l2.83-2.83 1.41 1.41-2.83 2.83zm0-11.32 1.41-1.41 2.83 2.83-1.41 1.41zM7 10H2V8h5z"/></svg></span></a></p>
+<h4 id="3-use-the-dac-cli-tool">3. Use the <a href="https://github.com/data-as-code/dac"><code>dac</code></a> CLI tool<a class="headerlink" href="#3-use-the-dac-cli-tool" title="Permanent link">&para;</a></h4>
+<p>Our <code>dac</code> CLI tool simplifies building Python packages that follow the Data as Code paradigm.</p>
+<p><a class="md-button" href="https://github.com/data-as-code/dac">Explore the <code>dac</code> CLI tool <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.76 8.69a.76.76 0 0 0-.76.76V20.9c0 .42.34.76.76.76.19 0 .35-.06.48-.16l1.91-1.55 1.66 3.62c.13.27.4.43.69.43.11 0 .22 0 .33-.08l2.76-1.28c.38-.18.56-.64.36-1.01L17.28 18l2.41-.45a.9.9 0 0 0 .43-.26c.27-.32.23-.79-.12-1.08l-8.74-7.35-.01.01a.76.76 0 0 0-.49-.18M15 10V8h5v2zm-1.17-5.24 2.83-2.83 1.41 1.41-2.83 2.83zM10 0h2v5h-2zM3.93 14.66l2.83-2.83 1.41 1.41-2.83 2.83zm0-11.32 1.41-1.41 2.83 2.83-1.41 1.41zM7 10H2V8h5z"/></svg></span></a></p>
+<h4 id="template-vs-dac-pack">Template vs. <code>dac pack</code><a class="headerlink" href="#template-vs-dac-pack" title="Permanent link">&para;</a></h4>
+<p>Which one should you choose?</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Template</th>
+<th style="text-align: center;"><code>dac pack</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Simplicity</td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.5 10h-6.75c-.62 0-1.15.38-1.38.91l-2.26 5.29c-.07.17-.11.36-.11.55V18a1 1 0 0 0 1 1h5.18l-.68 3.18v.24c0 .31.13.58.33.8l.79.78 4.94-4.94c.27-.27.44-.65.44-1.06v-6.5a1.5 1.5 0 0 0-1.5-1.5M12 6a1 1 0 0 0-1-1H5.82l.68-3.18v-.23c0-.31-.13-.59-.33-.8L5.38 0 .44 4.94C.17 5.21 0 5.59 0 6v6.5A1.5 1.5 0 0 0 1.5 14h6.75c.62 0 1.15-.38 1.38-.91l2.26-5.29c.07-.17.11-.36.11-.55z"/></svg></span></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 10a2 2 0 0 0-2-2h-6.32l.96-4.57c.02-.1.03-.21.03-.32 0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.58C7.22 7.95 7 8.45 7 9v10a2 2 0 0 0 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73zM1 21h4V9H1z"/></svg></span></td>
+</tr>
+<tr>
+<td style="text-align: center;">Possibility of customization</td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 10a2 2 0 0 0-2-2h-6.32l.96-4.57c.02-.1.03-.21.03-.32 0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.58C7.22 7.95 7 8.45 7 9v10a2 2 0 0 0 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73zM1 21h4V9H1z"/></svg></span></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 15h4V3h-4m-4 0H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2a2 2 0 0 0 2 2h6.31l-.95 4.57c-.02.1-.03.2-.03.31 0 .42.17.79.44 1.06L9.83 23l6.58-6.59c.37-.36.59-.86.59-1.41V5a2 2 0 0 0-2-2"/></svg></span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="make-releases">Make Releases<a class="headerlink" href="#make-releases" title="Permanent link">&para;</a></h3>
+<p>Choosing the right release version plays a crucial role in the Data as Code paradigm.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"></th>
+<th style="text-align: left;">When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Patch</strong></td>
+<td style="text-align: left;">Fixes in the data without changing its intended content</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Minor</strong></td>
+<td style="text-align: left;">Non-breaking changes, like a fresh version of the batch data</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Major</strong></td>
+<td style="text-align: left;">Breaking changes, such as changes to the Data Contract</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Patch and Major releases are usually manual, while Minor releases can be automated.</strong> Use the <code>dac</code> CLI tool to
+automate Minor releases with the <code>dac next-version</code> command.</p>
+<h2 id="why-distributing-data-as-code">Why distributing Data as Code?<a class="headerlink" href="#why-distributing-data-as-code" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Seamless compatibility</strong>: Data Scientists can ensure their code runs on compatible data by including the Data as
+    Code package as a dependency to their code. For example, if they add <code>dac-example-energy~=1.0</code> to the dependencies,
+    it will not be possible to use it together with <code>dac-example-energy==2.0.0</code>.</li>
+<li><strong>Smooth updates</strong>: Data pipelines can receive updates without breaking, as long as they subscribe to a major version.</li>
+<li><strong>Multiple release streams</strong>: Maintain different versions (e.g., <code>1.X.Y</code> and <code>2.X.Y</code>) to support users on older
+    versions.</li>
+<li><strong>Abstracted complexity</strong>: Data loading, sources, and locations are hidden from consumers, allowing producers to
+    change implementations without impacting users.</li>
+<li><strong>No hardcoded column names</strong>: <em>If column names are included in the <code>Schema</code></em>, consumers can avoid hardcoding field
+    names.</li>
+<li><strong>Robust testing</strong>: <em>If the <code>Schema.example</code> method is provided</em>, it enables consumers to write strong unit tests for
+    their code.</li>
+<li><strong>Self-documenting data</strong>: <em>If data and column descriptions are included in the <code>Schema</code></em>, data will be easier to
+    understand for consumers.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.instant", "navigation.tracking", "toc.follow"], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
