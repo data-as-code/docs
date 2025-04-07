@@ -24,6 +24,5 @@ repos:
       - id: mdformat
         args: ["--wrap", "120"]
         additional_dependencies:
-          - mdformat-admon
           - mdformat-mkdocs
           - mdformat-tables

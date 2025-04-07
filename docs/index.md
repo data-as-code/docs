@@ -8,30 +8,26 @@ Data as Code (DaC) is a paradigm of distributing versioned data as versioned cod
 
 !!! warning "Disclaimer"
 
-```
-Currently the focus is on tabular and batch data, and Python code only.
+    Currently the focus is on tabular and batch data, and Python code only.
 
-Future extensions may be possible, depending on the community interest.
-```
+    Future extensions may be possible, depending on the community interest.
 
 ## Consumer - Data Scientist
 
 ??? info "Follow along"
 
-````
-The code snippets below can be executed on your machine too!
-You just need to configure `pip` to point to the pypi registry where we stored the example DaC package. You can do this by running
+    The code snippets below can be executed on your machine too! You just need to configure `pip` to point to the pypi
+    registry where we stored the example DaC package. You can do this by running
 
-```shell
-❯ export PIP_EXTRA_INDEX_URL=https://gitlab.com/api/v4/projects/43746775/packages/pypi/simple
-```
+    ```shell
+    ❯ export PIP_EXTRA_INDEX_URL=https://gitlab.com/api/v4/projects/43746775/packages/pypi/simple
+    ```
 
-Of course don't forget to create an isolated environment before using `pip` to install the package:
+    Of course don't forget to create an isolated environment before using `pip` to install the package:
 
-```shell
-❯ python -m venv venv && . venv/bin/activate
-```
-````
+    ```shell
+    ❯ python -m venv venv && . venv/bin/activate
+    ```
 
 Say that the Data Engineers prepared the DaC `dac-example-energy` for you. Install it with
 
@@ -159,9 +155,8 @@ In this case [`pandera`](https://pandera.readthedocs.io/en/stable/index.html) ha
 
 !!! hint "Example data does not look right"
 
-```
-The example data above does not look right. Does this mean that there is something wrong in the implementation of the `example` method? Not really! Read [here](#nice-to-have-schemaexample-method).
-```
+    The example data above does not look right. Does this mean that there is something wrong in the implementation of the
+    `example` method? Not really! Read [here](#nice-to-have-schemaexample-method).
 
 ## Producer - Data Engineer
 
@@ -172,9 +167,9 @@ but are not strictly necessary.
 
 !!! hint "Use [`pandera`](https://pandera.readthedocs.io/en/stable/index.html) to define the Schema"
 
-```
-If the dataframe engine (pandas/polars/dask/spark...) you are using is supported by [`pandera`](https://pandera.readthedocs.io/en/stable/index.html), consider  using a [`DataFrameModel`](https://pandera.readthedocs.io/en/stable/dataframe_models.html) to define the Schema.
-```
+    If the dataframe engine (pandas/polars/dask/spark...) you are using is supported by
+    [`pandera`](https://pandera.readthedocs.io/en/stable/index.html), consider using a
+    [`DataFrameModel`](https://pandera.readthedocs.io/en/stable/dataframe_models.html) to define the Schema.
 
 ### Write the library
 
